@@ -1,10 +1,10 @@
-#include "gdt.h"
+#include "interrupts.h"
 
 #define WIDTH 80
 #define HEIGHT 25
 
-void printf(char *str) {
-    static uint16_t *video_memory = (uint16_t *) 0xB8000;
+void printf(const char *str) {
+    static auto *video_memory = (uint16_t *) 0xB8000;
     static uint8_t x = 0, y = 0;
     for (int32_t i = 0; str[i] != '\0'; ++i) {
         switch (str[i]) {
@@ -49,12 +49,12 @@ extern "C" void execConstructors() {
 }
 
 extern "C" void kernelMain(void *multiboot_struct, uint32_t magic_number) {
-    printf("Hello ZALUPA\tlmao\n");
-    printf("Hello ZAaLUPA\tlmao\n");
-    printf("Hello ZAaaLUPA\tlmao\n");
-    printf("Hello ZAaaaLUPA\tlmao\n");
-    printf("Hello ZAaaaaLUPA\tlmao\n");
-    printf("Hello ZAaaaaaLUPA\tlmao\n");
+    printf("Hello 1\tlmao\n");
     GlobalDescriptorTable gdt;
+    printf("Hello 2\tlmao\n");
+    InterruptManager interrupt_manager(&gdt);
+    printf("Hello 3\tlmao\n");
+    interrupt_manager.activate();
+    printf("Hello 4\tlmao\n");
     while (1);
 }

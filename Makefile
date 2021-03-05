@@ -2,21 +2,15 @@ GPPPARAMS = -m32 -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti 
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-objects = obj/loader.o obj/gdt.o obj/port.o obj/kernel.o
+objects = obj/loader.o \
+	obj/gdt.o \
+	obj/port.o \
+	obj/interrupts.o \
+	obj/interruptstubs.o \
+	obj/kernel.o
 
-obj/%.o: src/%.cpp
-	mkdir -p $(@D) || true
-	g++ $(GPPPARAMS) -o $@ -c $<
-
-obj/%.o: src/%.s
-	mkdir -p $(@D) || true
-	as $(ASPARAMS) -o $@ $<
-
-kernel.bin: linker.ld $(objects)
-	ld $(LDPARAMS) -T $< -o $@ $(objects)
-
-install: kernel.bin
-	cp $< /boot/kernel.bin
+.PHONY: all
+all: kernel.iso
 
 kernel.iso: kernel.bin
 	mkdir -p iso/boot/grub
@@ -29,6 +23,17 @@ kernel.iso: kernel.bin
 	echo '	boot' >> iso/boot/grub/grub.cfg
 	echo '}' >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=$@ iso/
+
+kernel.bin: linker.ld $(objects)
+	ld $(LDPARAMS) -T $< -o $@ $(objects)
+
+obj/%.o: src/%.cpp
+	mkdir -p $(@D) || true
+	g++ $(GPPPARAMS) -o $@ -c $<
+
+obj/%.o: src/%.s
+	mkdir -p $(@D) || true
+	as $(ASPARAMS) -o $@ $<
 
 .PHONY: clean
 clean:
