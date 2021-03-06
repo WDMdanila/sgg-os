@@ -46,15 +46,15 @@ void printfHex8(uint8_t key)
 }
 void printfHex16(uint16_t key)
 {
-    printfHex((key >> 8) & 0xFF);
-    printfHex( key & 0xFF);
+    printfHex8((key >> 8) & 0xFF);
+    printfHex8( key & 0xFF);
 }
 void printfHex32(uint32_t key)
 {
-    printfHex((key >> 24) & 0xFF);
-    printfHex((key >> 16) & 0xFF);
-    printfHex((key >> 8) & 0xFF);
-    printfHex( key & 0xFF);
+    printfHex8((key >> 24) & 0xFF);
+    printfHex8((key >> 16) & 0xFF);
+    printfHex8((key >> 8) & 0xFF);
+    printfHex8( key & 0xFF);
 }
 
 
