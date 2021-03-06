@@ -1,7 +1,5 @@
 #include "interrupts.h"
 
-void printf(const char *str);
-
 InterruptManager::GateDescriptor InterruptManager::interrupt_descriptors[256];
 
 InterruptManager::InterruptManager(GlobalDescriptorTable *gdt)

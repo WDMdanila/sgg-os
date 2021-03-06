@@ -3,6 +3,7 @@ ASPARAMS = --32
 LDPARAMS = -melf_i386
 
 objects = obj/loader.o \
+	obj/std.o \
 	obj/gdt.o \
 	obj/port.o \
 	obj/interrupts.o \

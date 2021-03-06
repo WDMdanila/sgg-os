@@ -2,6 +2,7 @@
 #define SGG_OS_INTERRUPTS_H
 
 #include "types.h"
+#include "std.h"
 #include "port.h"
 #include "gdt.h"
 
