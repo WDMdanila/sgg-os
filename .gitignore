@@ -1,7 +1,7 @@
-iso
-obj
-build
-.idea
+iso/
+obj/
+build/
+.idea/
 
 *.slo
 *.lo
