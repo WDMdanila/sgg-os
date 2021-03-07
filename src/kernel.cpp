@@ -14,12 +14,10 @@ extern "C" void execConstructors() {
 }
 
 extern "C" void kernelMain(void *multiboot_struct, uint32_t magic_number) {
-    printf("Hello 1\tlmao\n");
+    clearConsole();
+    printf("Hello World!\n");
     GlobalDescriptorTable gdt;
-    printf("Hello 2\tlmao\n");
     InterruptManager interrupt_manager(&gdt);
-    printf("Hello 3\tlmao\n");
     interrupt_manager.activate();
-    printf("Hello 4\tlmao\n");
     while (1);
 }

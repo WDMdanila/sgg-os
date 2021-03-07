@@ -11,4 +11,6 @@ void printfHex16(uint16_t data);
 
 void printfHex32(uint32_t data);
 
+void clearConsole();
+
 #endif //SGG_OS_STD_H

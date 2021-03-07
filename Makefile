@@ -10,10 +10,11 @@ objects = obj/loader.o \
 	obj/interruptstubs.o \
 	obj/kernel.o
 
-.PHONY: all
-all: kernel.iso
+.PHONY: run
+run: build/kernel.iso
+	qemu-system-i386 -cdrom ./build/kernel.iso
 
-kernel.iso: kernel.bin
+build/kernel.iso: kernel.bin
 	mkdir -p iso/boot/grub
 	mv $< iso/boot
 	echo 'set timeout=0' >> iso/boot/grub/grub.cfg
