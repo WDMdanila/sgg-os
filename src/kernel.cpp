@@ -1,5 +1,7 @@
 #include "std.h"
 #include "interrupts.h"
+#include "Drivers/KeyboardDriver.h"
+#include "Drivers/MouseDriver.h"
 
 typedef void (*constructor)();
 
@@ -18,6 +20,10 @@ extern "C" void kernelMain(void *multiboot_struct, uint32_t magic_number) {
     printf("Hello World!\n");
     GlobalDescriptorTable gdt;
     InterruptManager interrupt_manager(&gdt);
+
+    KeyboardDriver keyboard_driver(&interrupt_manager);
+    MouseDriver mouseDriver(&interrupt_manager);
+
     interrupt_manager.activate();
     while (1);
 }

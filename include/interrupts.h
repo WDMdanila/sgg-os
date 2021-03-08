@@ -3,11 +3,17 @@
 
 #include "types.h"
 #include "std.h"
-#include "port.h"
+#include "Ports/Port8Bit.h"
 #include "gdt.h"
+#include "Drivers/InterruptHandler.h"
+
 
 class InterruptManager {
+    friend class InterruptHandler;
+
 protected:
+    static InterruptManager *active_interrupt_manager;
+    InterruptHandler *handlers[256];
     struct GateDescriptor {
         uint16_t address_low_bits;
         uint16_t gdt_code_segment_selector_offset;
@@ -39,13 +45,19 @@ public:
 
     void activate();
 
+    void deactivate();
+
     static uint32_t handleInterrupt(uint8_t interrupt_number, uint32_t stack_ptr);
+
+    uint32_t doHandleInterrupt(uint8_t interrupt_number, uint32_t stack_ptr);
 
     static void ignoreInterrupt();
 
     static void handleInterruptRequest0x00();
 
     static void handleInterruptRequest0x01();
+
+    static void handleInterruptRequest0x0C();
 };
 
 #endif //SGG_OS_INTERRUPTS_H

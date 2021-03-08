@@ -1,20 +1,24 @@
-GPPPARAMS = -m32 -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore
+GPPPARAMS = -m32 -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti \
+	-fno-exceptions -fno-leading-underscore -Wno-write-strings
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
 objects = obj/loader.o \
 	obj/std.o \
 	obj/gdt.o \
-	obj/port.o \
+	obj/Ports/Port.o \
+	obj/Ports/Port8Bit.o \
+	obj/Ports/Port16Bit.o \
+	obj/Ports/Port32Bit.o \
 	obj/interrupts.o \
 	obj/interruptstubs.o \
+	obj/Drivers/InterruptHandler.o \
+	obj/Drivers/KeyboardDriver.o \
+	obj/Drivers/MouseDriver.o \
 	obj/kernel.o
 
-.PHONY: run
-run: build/kernel.iso
-	qemu-system-i386 -cdrom ./build/kernel.iso
-
 build/kernel.iso: kernel.bin
+	mkdir -p build
 	mkdir -p iso/boot/grub
 	mv $< iso/boot
 	echo 'set timeout=0' >> iso/boot/grub/grub.cfg
@@ -41,3 +45,12 @@ obj/%.o: src/%.s
 clean:
 	rm -rf obj || true
 	rm -rf iso || true
+	rm -rf build || true
+
+.PHONY: all
+all: build/kernel.iso
+	echo "Build done!"
+
+.PHONY: run
+run: all
+	qemu-system-i386 -cdrom ./build/kernel.iso &
