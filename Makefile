@@ -13,6 +13,8 @@ objects = obj/loader.o \
 	obj/interrupts.o \
 	obj/interruptstubs.o \
 	obj/Drivers/InterruptHandler.o \
+	obj/Drivers/Driver.o \
+	obj/Drivers/DriverManager.o \
 	obj/Drivers/KeyboardDriver.o \
 	obj/Drivers/MouseDriver.o \
 	obj/kernel.o

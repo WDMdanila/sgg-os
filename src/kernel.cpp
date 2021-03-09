@@ -1,5 +1,6 @@
 #include "std.h"
 #include "interrupts.h"
+#include "Drivers/DriverManager.h"
 #include "Drivers/KeyboardDriver.h"
 #include "Drivers/MouseDriver.h"
 
@@ -20,10 +21,14 @@ extern "C" void kernelMain(void *multiboot_struct, uint32_t magic_number) {
     printf("Hello World!\n");
     GlobalDescriptorTable gdt;
     InterruptManager interrupt_manager(&gdt);
-
+    DriverManager driver_manager;
+    MouseDriver mouse_driver(&interrupt_manager);
     KeyboardDriver keyboard_driver(&interrupt_manager);
-    MouseDriver mouseDriver(&interrupt_manager);
 
+    driver_manager.addDriver(&mouse_driver);
+    driver_manager.addDriver(&keyboard_driver);
+
+    driver_manager.activateDrivers();
     interrupt_manager.activate();
     while (1);
 }

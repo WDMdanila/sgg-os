@@ -4,21 +4,7 @@
 
 MouseDriver::MouseDriver(InterruptManager *manager)
         : InterruptHandler(0x2C, manager),
-          data_port(0x60), command_port(0x64) {
-    x = 40;
-    y = 12;
-    invertCursorColor();
-    offset = 0;
-    buttons = 0;
-    command_port.write(0xA8); // activate mouse
-    command_port.write(0x20); // get current state
-    uint8_t status = data_port.read() | 2;
-    command_port.write(0x60); // prepare for setting state
-    data_port.write(status);
-    command_port.write(0xD4);
-    data_port.write(0xF4);
-    data_port.read();
-}
+          data_port(0x60), command_port(0x64) {}
 
 MouseDriver::~MouseDriver() {
 
@@ -46,11 +32,9 @@ uint32_t MouseDriver::handle(uint32_t stack_ptr) {
             invertCursorColor();
         }
 
-        for(uint8_t i = 0; i < 3; i++)
-        {
-            if((buffer[0] & (0x1<<i)) != (buttons & (0x1<<i)))
-            {
-                if(buttons & (0x1<<i))
+        for (uint8_t i = 0; i < 3; i++) {
+            if ((buffer[0] & (0x1 << i)) != (buttons & (0x1 << i))) {
+                if (buttons & (0x1 << i))
                     printf("Mouse released!");
                 else
                     printf("Mouse pressed!");
@@ -62,8 +46,32 @@ uint32_t MouseDriver::handle(uint32_t stack_ptr) {
 }
 
 void MouseDriver::invertCursorColor() const {
-    static auto *VideoMemory = (uint16_t *) 0xb8000;
-    VideoMemory[80 * y + x] = (VideoMemory[80 * y + x] & 0x0F00) << 4
-                              | (VideoMemory[80 * y + x] & 0xF000) >> 4
-                              | (VideoMemory[80 * y + x] & 0x00FF);
+    static auto *video_memory = (uint16_t *) 0xb8000;
+    video_memory[80 * y + x] = (video_memory[80 * y + x] & 0x0F00) << 4
+                               | (video_memory[80 * y + x] & 0xF000) >> 4
+                               | (video_memory[80 * y + x] & 0x00FF);
+}
+
+void MouseDriver::activate() {
+    x = 40;
+    y = 12;
+    invertCursorColor();
+    offset = 0;
+    buttons = 0;
+    command_port.write(0xA8); // activate mouse
+    command_port.write(0x20); // get current state
+    uint8_t status = data_port.read() | 2;
+    command_port.write(0x60); // prepare for setting state
+    data_port.write(status);
+    command_port.write(0xD4);
+    data_port.write(0xF4);
+    data_port.read();
+}
+
+void MouseDriver::deactivate() {
+
+}
+
+int32_t MouseDriver::reset() {
+    return 0;
 }

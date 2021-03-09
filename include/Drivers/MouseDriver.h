@@ -2,9 +2,10 @@
 #define SGG_OS_MOUSEDRIVER_H
 
 #include "Drivers/InterruptHandler.h"
+#include "Drivers/Driver.h"
 #include "Ports/Port8Bit.h"
 
-class MouseDriver : public InterruptHandler {
+class MouseDriver : public InterruptHandler, public Driver {
 public:
     MouseDriver(InterruptManager *manager);
 
@@ -16,6 +17,13 @@ public:
     uint8_t offset;
     uint8_t buttons;
     int8_t x, y;
+
+    void activate() override;
+
+    void deactivate() override;
+
+    int32_t reset() override;
+
 protected:
     void invertCursorColor() const;
 
