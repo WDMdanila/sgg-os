@@ -49,7 +49,7 @@ void PCIController::selectDrivers(DriverManager *driver_manager) {
             for (int32_t function = 0; function < functions_num; function++) {
                 PCIDeviceDescriptor dev = getDeviceDescriptor(bus, device, function);
                 if (dev.vendor_id == 0x0000 || dev.vendor_id == 0xFFFF) {
-                    break;
+                    continue;
                 }
                 printf("PCI BUS ");
                 printfHex32(bus);
