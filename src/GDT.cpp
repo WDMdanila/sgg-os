@@ -1,5 +1,5 @@
 
-#include "gdt.h"
+#include "GDT.h"
 
 
 GlobalDescriptorTable::GlobalDescriptorTable()

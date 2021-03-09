@@ -1,7 +1,7 @@
 #ifndef SGG_OS_KEYBOARDDRIVER_H
 #define SGG_OS_KEYBOARDDRIVER_H
 
-#include "interrupts.h"
+#include "InterruptManager.h"
 #include "Ports/Port.h"
 #include "Drivers/InterruptHandler.h"
 #include "Drivers/Driver.h"

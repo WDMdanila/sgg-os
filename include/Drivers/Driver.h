@@ -1,7 +1,7 @@
 #ifndef SGG_OS_DRIVER_H
 #define SGG_OS_DRIVER_H
 
-#include "types.h"
+#include "Types.h"
 
 class Driver {
 public:

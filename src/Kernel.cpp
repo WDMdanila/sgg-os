@@ -1,8 +1,9 @@
-#include "std.h"
-#include "interrupts.h"
+#include "STD.h"
+#include "InterruptManager.h"
 #include "Drivers/DriverManager.h"
 #include "Drivers/KeyboardDriver.h"
 #include "Drivers/MouseDriver.h"
+#include "PCI.h"
 
 typedef void (*constructor)();
 
@@ -22,6 +23,7 @@ extern "C" void kernelMain(void *multiboot_struct, uint32_t magic_number) {
     GlobalDescriptorTable gdt;
     InterruptManager interrupt_manager(&gdt);
     DriverManager driver_manager;
+    PCIController pci_controller;
     MouseDriver mouse_driver(&interrupt_manager);
     KeyboardDriver keyboard_driver(&interrupt_manager);
 
@@ -30,5 +32,6 @@ extern "C" void kernelMain(void *multiboot_struct, uint32_t magic_number) {
 
     driver_manager.activateDrivers();
     interrupt_manager.activate();
+    pci_controller.selectDrivers(&driver_manager);
     while (1);
 }

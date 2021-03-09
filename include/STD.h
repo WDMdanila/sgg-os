@@ -1,7 +1,7 @@
 #ifndef SGG_OS_STD_H
 #define SGG_OS_STD_H
 
-#include "types.h"
+#include "Types.h"
 
 void printf(const char *str);
 

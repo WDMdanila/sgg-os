@@ -2,7 +2,7 @@
 #define SGG_OS_DRIVERMANAGER_H
 
 #include "Drivers/Driver.h"
-#include "types.h"
+#include "Types.h"
 
 class DriverManager {
 public:

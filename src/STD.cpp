@@ -1,4 +1,4 @@
-#include "std.h"
+#include "STD.h"
 
 #define WIDTH 80
 #define HEIGHT 25

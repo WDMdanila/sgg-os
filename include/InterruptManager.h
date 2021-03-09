@@ -1,10 +1,10 @@
-#ifndef SGG_OS_INTERRUPTS_H
-#define SGG_OS_INTERRUPTS_H
+#ifndef SGG_OS_INTERRUPTMANAGER_H
+#define SGG_OS_INTERRUPTMANAGER_H
 
-#include "types.h"
-#include "std.h"
+#include "Types.h"
+#include "STD.h"
 #include "Ports/Port8Bit.h"
-#include "gdt.h"
+#include "GDT.h"
 #include "Drivers/InterruptHandler.h"
 
 
@@ -60,4 +60,4 @@ public:
     static void handleInterruptRequest0x0C();
 };
 
-#endif //SGG_OS_INTERRUPTS_H
+#endif //SGG_OS_INTERRUPTMANAGER_H

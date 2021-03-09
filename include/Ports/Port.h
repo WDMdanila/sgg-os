@@ -1,7 +1,7 @@
 #ifndef SGG_OS_PORT_H
 #define SGG_OS_PORT_H
 
-#include "types.h"
+#include "Types.h"
 
 class Port {
 protected:

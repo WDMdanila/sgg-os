@@ -1,5 +1,5 @@
 #include "Drivers/InterruptHandler.h"
-#include "interrupts.h"
+#include "InterruptManager.h"
 
 InterruptHandler::InterruptHandler(uint8_t interrupt_num, InterruptManager *manager)
         : interrupt_num(interrupt_num), manager(manager) {

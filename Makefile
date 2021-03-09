@@ -4,20 +4,21 @@ ASPARAMS = --32
 LDPARAMS = -melf_i386
 
 objects = obj/loader.o \
-	obj/std.o \
-	obj/gdt.o \
+	obj/STD.o \
+	obj/GDT.o \
 	obj/Ports/Port.o \
 	obj/Ports/Port8Bit.o \
 	obj/Ports/Port16Bit.o \
 	obj/Ports/Port32Bit.o \
-	obj/interrupts.o \
+	obj/InterruptManager.o \
 	obj/interruptstubs.o \
 	obj/Drivers/InterruptHandler.o \
 	obj/Drivers/Driver.o \
 	obj/Drivers/DriverManager.o \
 	obj/Drivers/KeyboardDriver.o \
 	obj/Drivers/MouseDriver.o \
-	obj/kernel.o
+	obj/PCI.o \
+	obj/Kernel.o
 
 build/kernel.iso: kernel.bin
 	mkdir -p build

@@ -1,7 +1,7 @@
 #ifndef SGG_OS_INTERRUPTHANDLER_H
 #define SGG_OS_INTERRUPTHANDLER_H
 
-#include "types.h"
+#include "Types.h"
 
 class InterruptManager;
 
