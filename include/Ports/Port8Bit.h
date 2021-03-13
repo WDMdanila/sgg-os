@@ -7,7 +7,7 @@ class Port8Bit : public Port {
 public:
     Port8Bit(uint16_t number);
 
-    ~Port8Bit();
+    ~Port8Bit() override;
 
     virtual void write(uint8_t data);
 
@@ -18,7 +18,7 @@ class Port8BitSlow : public Port8Bit {
 public:
     Port8BitSlow(uint16_t number);
 
-    ~Port8BitSlow();
+    ~Port8BitSlow() override;
 
     virtual void write(uint8_t data);
 };

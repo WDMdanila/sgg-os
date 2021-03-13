@@ -10,7 +10,9 @@ objects = obj/loader.o \
 	obj/Ports/Port8Bit.o \
 	obj/Ports/Port16Bit.o \
 	obj/Ports/Port32Bit.o \
+	obj/Multitasking.o \
 	obj/InterruptManager.o \
+	obj/MemoryManagement.o \
 	obj/interruptstubs.o \
 	obj/Drivers/InterruptHandler.o \
 	obj/Drivers/Driver.o \

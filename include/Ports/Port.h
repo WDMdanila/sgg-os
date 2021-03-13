@@ -4,12 +4,13 @@
 #include "Types.h"
 
 class Port {
+public:
+    explicit Port(uint16_t number);
+
+    virtual ~Port();
+
 protected:
     uint16_t number;
-
-    Port(uint16_t number);
-
-    ~Port();
 };
 
 #endif //SGG_OS_PORT_H

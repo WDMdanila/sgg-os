@@ -13,11 +13,6 @@ public:
 
     virtual uint32_t handle(uint32_t stack_ptr) override;
 
-    uint8_t buffer[3];
-    uint8_t offset;
-    uint8_t buttons;
-    int8_t x, y;
-
     void activate() override;
 
     void deactivate() override;
@@ -27,7 +22,10 @@ public:
 protected:
     void invertCursorColor() const;
 
-private:
+    uint8_t buffer[3];
+    uint8_t offset;
+    uint8_t buttons;
+    int8_t x, y;
     Port8Bit data_port;
     Port8Bit command_port;
 

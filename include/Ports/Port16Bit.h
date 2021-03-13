@@ -7,7 +7,7 @@ class Port16Bit : public Port {
 public:
     Port16Bit(uint16_t number);
 
-    ~Port16Bit();
+    ~Port16Bit() override;
 
     virtual void write(uint16_t data);
 
